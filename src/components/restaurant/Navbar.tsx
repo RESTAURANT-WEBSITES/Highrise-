@@ -64,7 +64,7 @@ const Navbar = () => {
             )}
           </button>
           <a href="#reservation" className="hidden md:inline-flex items-center px-6 py-2.5 bg-gold text-primary-foreground font-sans text-sm font-semibold tracking-wider uppercase rounded-sm hover:bg-gold-light transition-colors duration-300">
-            Book Now
+            Reserve a Table
           </a>
           <button className="md:hidden text-foreground" onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
@@ -82,7 +82,7 @@ const Navbar = () => {
               </a>
             ))}
             <a href="#reservation" onClick={() => setMobileOpen(false)} className="mt-2 text-center px-6 py-3 bg-gold text-primary-foreground font-semibold text-sm tracking-wider uppercase rounded-sm">
-              Book Now
+              Reserve a Table
             </a>
           </div>
         </div>
