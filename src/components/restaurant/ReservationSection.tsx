@@ -2,8 +2,31 @@ import { useState } from "react";
 import { CalendarDays, Clock, Users, User } from "lucide-react";
 import { toast } from "sonner";
 
+const GUEST_OPTIONS = [
+  { value: "1", label: "1 Guest" },
+  { value: "2", label: "2 Guests" },
+  { value: "3", label: "3 Guests" },
+  { value: "4", label: "4 Guests" },
+  { value: "5", label: "5 Guests" },
+  { value: "10", label: "10 Guests" },
+  { value: "custom", label: "Add custom number of guests" },
+];
+
 const ReservationSection = () => {
   const [form, setForm] = useState({ date: "", time: "", guests: "2", name: "", email: "", phone: "" });
+  const [customGuests, setCustomGuests] = useState("");
+
+  const isCustomGuests = form.guests === "custom";
+
+  const handleGuestsChange = (value: string) => {
+    if (value === "custom") {
+      setForm({ ...form, guests: "custom" });
+      setCustomGuests(customGuests || "");
+    } else {
+      setForm({ ...form, guests: value });
+      setCustomGuests("");
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -11,8 +34,14 @@ const ReservationSection = () => {
       toast.error("Please fill in all required fields.");
       return;
     }
-    toast.success(`Table reserved for ${form.name} on ${form.date} at ${form.time} for ${form.guests} guests.`);
+    if (isCustomGuests && (!customGuests || parseInt(customGuests, 10) < 1)) {
+      toast.error("Please enter a valid number of guests.");
+      return;
+    }
+    const guestCount = isCustomGuests ? customGuests : form.guests;
+    toast.success(`Table reserved for ${form.name} on ${form.date} at ${form.time} for ${guestCount} guests.`);
     setForm({ date: "", time: "", guests: "2", name: "", email: "", phone: "" });
+    setCustomGuests("");
   };
 
   const inputClass = "w-full bg-surface-elevated border border-border rounded-sm px-4 py-3 text-foreground font-sans text-sm placeholder:text-muted-foreground focus:outline-none focus:border-gold/50 transition-colors";
@@ -43,11 +72,30 @@ const ReservationSection = () => {
               <label className="flex items-center gap-2 text-sm text-muted-foreground mb-2 font-sans">
                 <Users size={14} className="text-gold" /> Guests
               </label>
-              <select value={form.guests} onChange={(e) => setForm({ ...form, guests: e.target.value })} className={inputClass}>
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
-                  <option key={n} value={n}>{n} {n === 1 ? "Guest" : "Guests"}</option>
-                ))}
-              </select>
+              {isCustomGuests ? (
+                <div className="space-y-2">
+                  <select value="custom" onChange={(e) => handleGuestsChange(e.target.value)} className={inputClass}>
+                    {GUEST_OPTIONS.map((opt) => (
+                      <option key={opt.value} value={opt.value}>{opt.label}</option>
+                    ))}
+                  </select>
+                  <input
+                    type="number"
+                    min={1}
+                    max={100}
+                    placeholder="Enter number of guests"
+                    value={customGuests}
+                    onChange={(e) => setCustomGuests(e.target.value.replace(/^0+(?=\d)/, "") || "")}
+                    className={inputClass}
+                  />
+                </div>
+              ) : (
+                <select value={form.guests} onChange={(e) => handleGuestsChange(e.target.value)} className={inputClass}>
+                  {GUEST_OPTIONS.map((opt) => (
+                    <option key={opt.value} value={opt.value}>{opt.label}</option>
+                  ))}
+                </select>
+              )}
             </div>
             <div>
               <label className="flex items-center gap-2 text-sm text-muted-foreground mb-2 font-sans">
