@@ -14,7 +14,7 @@ const HeroSection = () => (
         Elevated Dining,<br />
         <span className="gold-text-gradient">Unmatched Views.</span>
       </h1>
-      <p className="font-sans text-lg text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
+      <p className="font-sans text-lg text-white max-w-2xl mx-auto mb-10 leading-relaxed">
         Experience culinary artistry high above the city skyline. Where every dish tells a story and every view takes your breath away.
       </p>
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
