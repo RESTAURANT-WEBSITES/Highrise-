@@ -5,7 +5,7 @@ import { Plus } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import chickenTikkaBites from "@/assets/menu/starters/Chicken_Tikka_Bites.png";
 import crispyVegSpringRolls from "@/assets/menu/starters/Crispy_Veg_Spring_Rolls.png";
-import prawn65 from "@/assets/menu/starters/Prawn_65.png";
+//import prawn65 from "@/assets/menu/starters/Prawn_65.png";
 import chickenLollipop from "@/assets/menu/starters/Chicken_Lollipop.png";
 import chickenMandi from "@/assets/menu/maindishes/Chicken_Mandi.png";
 import butterChicken from "@/assets/menu/maindishes/Butter_Chicken.png";
@@ -32,13 +32,13 @@ const menuData = {
       price: 6,
       image: crispyVegSpringRolls
     },
-    {
-      id: "s3",
-      name: "Prawn 65",
-      desc: "Crispy, spicy prawn 65 tossed in a flavorful blend of South Indian spices and a hint of tangy heat.",
-      price: 10,
-      image: prawn65
-    },
+    // {
+    //   id: "s3",
+    //   name: "Prawn 65",
+    //   desc: "Crispy, spicy prawn 65 tossed in a flavorful blend of South Indian spices and a hint of tangy heat.",
+    //   price: 10,
+    //   image: prawn65
+    // },
     {
       id: "s4",
       name: "Chicken Lollipop",
